@@ -1,9 +1,11 @@
 const Post = require('../../models').post
 
-module.exports.addPost = (post,tags) => {
+module.exports.addPost = (post,tags,user) => {
+
   return Post.create({
     title : post.title,
     content : post.content,
+    userId : user.id,
     tags : tags,
     created_at : new Date(),
     updated_at : new Date()
@@ -13,6 +15,7 @@ module.exports.addPost = (post,tags) => {
   })
   .catch(err => {
     console.log(err);
+    return 0
   })
 }
 

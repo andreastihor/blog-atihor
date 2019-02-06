@@ -6,5 +6,14 @@ module.exports = {
   },
   searchPost : {
     handlers : post.searchPost
+  },
+  createPost : {
+    handler : post.createPost
+  },
+  deletePost : {
+    handler : post.deletePost
+  },
+  updatePost : {
+    handler : post.updatePost
   }
 }

@@ -49,3 +49,11 @@ module.exports.updatePost = (id,payload,tag) => {
 module.exports.getAll = () => {
   return Post.findAll();
 }
+
+module.exports.search = (tag) => {
+  return Post.findAll({
+  }).then (user => {
+    console.log(user);
+    //blm kelar
+  })
+}

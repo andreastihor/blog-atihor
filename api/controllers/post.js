@@ -42,3 +42,8 @@ module.exports.updatePost = (request,h) => {
 module.exports.getPost = (request,h) => {
   return Post.getAll();
 }
+
+module.exports.searchPost = (request,h) => {
+  const tags = request.params.tags
+  return Post.search(tags.split(','));
+}

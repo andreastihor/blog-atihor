@@ -16,3 +16,13 @@ module.exports.deletePost = (request,h) => {
   }
   return "failed"
 }
+
+module.exports.updatePost = (request,h) => {
+  const tags = request.payload.tags;
+  const id = request.params.id;
+  const sucess = Post.updatePost(id,request.payload,tags.split(','));
+  if (sucess) {
+    return "sucess"
+  }
+  return "failed"
+}

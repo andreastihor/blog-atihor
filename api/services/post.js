@@ -28,3 +28,18 @@ module.exports.deletePost = (id) => {
     return 0
   })
 }
+
+module.exports.updatePost = (id,post,tag) => {
+
+   return Post.findOne({where : {id}})
+    .then((post) => {
+      post.update({
+        title : post.title,
+        content : post.content,
+        tags : tag,
+        updated_at : new Date()
+      })
+        .then(() => 1)
+    })
+
+}

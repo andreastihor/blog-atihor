@@ -1,6 +1,5 @@
-
 const User = require('../services/user');
-const Boom = require('boom')
+const Boom = require('boom');
 
 module.exports.login = (request,h) => {
 
@@ -10,15 +9,4 @@ module.exports.login = (request,h) => {
     }
 
   return Boom.badRequest('wrong credentials');
-}
-
-const updatePost = (request,h) => {
-  const id = request.params.post
-  //search for post here
-  const title  = request.payload.title;
-  const content = request.payload.content;
-  const tags = request.payload.tags;
-  const tag = tags.split(',')
-  //masukin data disni
-  return "sucess"
 }

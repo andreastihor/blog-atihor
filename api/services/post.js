@@ -1,8 +1,7 @@
 const Post = require('../../models').post
 
 module.exports.addPost = (post,tags) => {
-  return tags
-  Post.create({
+  return Post.create({
     title : post.title,
     content : post.content,
     tags : tags,
@@ -14,5 +13,18 @@ module.exports.addPost = (post,tags) => {
   })
   .catch(err => {
     console.log(err);
+  })
+}
+
+module.exports.deletePost = (id) => {
+  return Post.findOne( {where : {id} })
+  .then( (post) => {
+    post.destroy();
+  })
+  .then(() => {
+    return 1
+  })
+  .catch(err => {
+    return 0
   })
 }

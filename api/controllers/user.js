@@ -1,23 +1,15 @@
-const user = {
-  username : 'andreas',
-  password : 'test',
-  fullname : 'andreas tihor'
-}
-// const User = require('../../models').user;
+
+const User = require('../services/user');
+const Boom = require('boom')
 
 const login = (request,h) => {
-  const username = request.payload.username;
-  const password = request.payload.password;
-  //check credentials here
 
-
-  if (username == user.username) {
-      if (password == user.password) {
-          return user;
-      }
+  const user =  User.login(request.payload)
+  if (user) {
+    return user
   }
 
-  return null;
+  return Boom.badRequest('wrong credentials');
 }
 
 const createPost = (request,h) => {

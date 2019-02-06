@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.INTEGER
-      },
+      fullname : Sequelize.STRING,
+      username : Sequelize.STRING,
+      password : Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,4 +1,11 @@
 const post = require('../controllers/post');
+const Joi = require('joi')
+
+const validatePayload = {
+  title : Joi.string().required().min(5),
+  content : Joi.string().required().min(5),
+  tags : Joi.string().required(),
+}
 
 module.exports = {
   getPost : {
@@ -8,12 +15,18 @@ module.exports = {
     handlers : post.searchPost
   },
   createPost : {
-    handler : post.createPost
+    handler : post.createPost,
+    validate : {
+      payload :validatePayload
+    }
   },
   deletePost : {
-    handler : post.deletePost
+    handler : post.deletePost,
   },
   updatePost : {
-    handler : post.updatePost
+    handler : post.updatePost,
+    validate : {
+      payload : validatePayload
+    }
   }
 }

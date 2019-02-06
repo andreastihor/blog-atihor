@@ -9,10 +9,10 @@ const validatePayload = {
 
 module.exports = {
   getPost : {
-    handlers : post.getPost
+    handler : post.getPost
   },
   searchPost : {
-    handlers : post.searchPost
+    handler : post.searchPost
   },
   createPost : {
     handler : post.createPost,

@@ -26,3 +26,7 @@ module.exports.updatePost = (request,h) => {
   }
   return "failed"
 }
+
+module.exports.getPost = (request,h) => {
+  return Post.getAll();
+}

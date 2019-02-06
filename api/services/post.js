@@ -29,17 +29,20 @@ module.exports.deletePost = (id) => {
   })
 }
 
-module.exports.updatePost = (id,post,tag) => {
-
+module.exports.updatePost = (id,payload,tag) => {
    return Post.findOne({where : {id}})
     .then((post) => {
       post.update({
-        title : post.title,
-        content : post.content,
+        title : payload.title,
+        content : payload.content,
         tags : tag,
         updated_at : new Date()
       })
         .then(() => 1)
     })
 
+}
+
+module.exports.getAll = () => {
+  return Post.findAll();
 }

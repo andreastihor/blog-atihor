@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/andreastihor/blog-atihor#readme",
   "dependencies": {
+    "boom": "^7.3.0",
     "hapi": "^18.0.1",
     "hapi-auth-basic": "^5.0.0",
     "joi": "^14.3.1",
+    "pg": "^7.8.0",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "sequelize": "^4.42.0",

@@ -8,12 +8,23 @@ const server = Hapi.server({
   port : 3000
 });
 
+
+
 // Start the server
 const start =  async () => {
 	try {
 
 		await server.register(require('./api'));
+		await server.register(require('hapi-auth-cookie'))
 
+		server.auth.strategy('restricted', 'cookie',{
+    password : '$2a$10$JwbwopKOwGepKZ/bRbFjB.1Av0HMxxbmGYDeofT55db1WdPEmIf82',
+    cookie : 'session',
+    isSecure : false,
+
+	// biar ga redirect ke route yg pake try mode di strategy
+	// redirectOnTry : false (error)
+	});
 		await server.start();
 	}
 	catch (err) {

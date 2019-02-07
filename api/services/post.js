@@ -46,16 +46,17 @@ module.exports.deletePost = (id) => {
   })
 }
 
-module.exports.updatePost = (id,payload,tag) => {
+module.exports.updatePost = (id,payload,tags) => {
    return PostModel.findOne({where : {id}})
     .then((post) => {
-      post.update({
+    return   post.update({
         title : payload.title,
         content : payload.content,
-        tags : tag,
         updated_at : new Date()
       })
-        .then(() => 1)
+        .then(() => {
+          return Tag.updateTags(tags,id)
+        })
     })
 
 }

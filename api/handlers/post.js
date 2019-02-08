@@ -11,6 +11,9 @@ module.exports = {
   getPost : {
     handler : post.getPost
   },
+  getPostbyId : {
+    handler : post.getPostbyId
+  },
   searchPost : {
     handler : post.searchPost
   },

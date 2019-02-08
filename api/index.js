@@ -5,6 +5,7 @@ module.exports = {
   register : (server) => {
     server.route([
       {method : 'GET' , path : '/' , options: post.getPost},
+      {method : 'GET' , path : '/{id}' , options: post.getPostbyId},
       {method : 'GET' , path : '/search/{tags}' , options: post.searchPost },
       {method : 'POST' , path : '/signin' , options: user.login  },
       {method : 'POST' , path : '/createPost' , options: post.createPost },

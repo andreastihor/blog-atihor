@@ -1,5 +1,6 @@
 const User = require('../services/user');
 const Boom = require('boom');
+const jwt = require('jsonwebtoken')
 
 module.exports.login = (request,h) => {
 
@@ -8,8 +9,9 @@ module.exports.login = (request,h) => {
     if (user == "false") {
       return "false"
     }
-    request.cookieAuth.set({user})
-    return Promise.resolve(true)
+    const token = jwt.sign({user}, 'secret');
+    request.cookieAuth.set({user:token})
+    return token
   })
   .catch(err => {
     console.log(err);

@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+
 const Post = require('../services/post');
 const Tag = require('../services/tag')
 
@@ -6,12 +8,13 @@ const ModelPost = require('../../models').post
 const ModelUser = require('../../models').user
 
 module.exports.createPost = (request,h) => {
-  const userLogin =  request.state.session
+  var userLogin =  request.state.session
+  userLogin = jwt.verify(userLogin.user,'secret')
   if (!userLogin) {
     return "false"
   }
   const tags = request.payload.tags
-  const sucess = Post.addPost(request.payload,tags.split(','),userLogin.user);
+  const sucess = Post.addPost(request.payload,tags.split(','),userLogin);
   return sucess
   if (sucess) {
     return "sucess"

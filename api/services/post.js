@@ -62,7 +62,11 @@ module.exports.updatePost = (id,payload,tags) => {
 }
 
 module.exports.getAll = () => {
-  return PostModel.findAll();
+  return PostModel.findAll({
+    include : [{
+      model: TagModel
+    }]
+  });
 }
 
 module.exports.search = (tag) => {

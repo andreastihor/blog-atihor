@@ -1,7 +1,7 @@
 const Tag = require('../../models').tags
 const PostTag = require('../../models').postTag
 
-const addTag = (postId,tag) => {
+module.exports.addTag = (postId,tag) => {
   console.log(tag);
   return Promise.all(tag.map(tagx => {
     return Tag.findOrCreate({
@@ -21,13 +21,13 @@ const addTag = (postId,tag) => {
   }))
 }
 module.exports.updateTags = (tags,id) => {
-  deleteTag(tags,id)
-  addTag(id,tags)
+  this.deleteTag(tags,id)
+  this.addTag(id,tags)
 
 return true
 }
 
-const deleteTag = (tags,id) => {
+module.exports.deleteTag = (tags,id) => {
   return tags.map(tag => {
     return Tag.findOrCreate({
       where : {name : tag}
@@ -46,9 +46,9 @@ const deleteTag = (tags,id) => {
   })
 }
 
-module,exports = {
-  deleteTag,addTag
-}
+// module,exports = {
+//   deleteTag,addTag
+// }
 // module.exports.updateTags = (tags , id) => {
 //   return Promise.all(tags.map(tagx => {
 //     return Tag.findOrCreate({

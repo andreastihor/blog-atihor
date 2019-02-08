@@ -7,11 +7,20 @@ const ModelTag = require('../../models').tags
 const ModelPost = require('../../models').post
 const ModelUser = require('../../models').user
 
+
+
 module.exports.createPost = (request,h) => {
-  var userLogin =  request.state.session
-  userLogin = jwt.verify(userLogin.user,'secret')
+  const jwttoken = request.headers.token
+  try {
+     var token =  jwt.verify(jwttoken,'secret')
+  } catch (err) {
+    console.log(err);
+  }
+  const userLogin = token.user
   if (!userLogin) {
-    return "false"
+      return {
+        message : "no authentication"
+      }
   }
   const tags = request.payload.tags
   const sucess = Post.addPost(request.payload,tags.split(','),userLogin);
@@ -23,7 +32,7 @@ module.exports.createPost = (request,h) => {
 
 }
 module.exports.deletePost = (request,h) => {
-  const userLogin =  request.state.session
+  const userLogin =  request.headers
   if (!userLogin) {
     return "false"
   }
@@ -35,7 +44,7 @@ module.exports.deletePost = (request,h) => {
 }
 
 module.exports.updatePost = (request,h) => {
-  const userLogin =  request.state.session
+  const userLogin =  request.headers
   if (!userLogin) {
     return "false"
   }
@@ -50,6 +59,11 @@ module.exports.updatePost = (request,h) => {
 
 module.exports.getPost = (request,h) => {
   return Post.getAll();
+}
+
+module.exports.getPostbyId = (request,h) =>  {
+  const id = request.params.id
+  return Post.getbyId(id)
 }
 
 module.exports.searchPost = async (request,h) => {

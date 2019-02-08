@@ -23,11 +23,19 @@ module.exports.addPost = (post,tags,user) => {
   })
 }
 
+module.exports.getbyId = (id) => {
+  return PostModel.findOne({
+    include : [{
+      model : TagModel
+    }],
+    where : {
+      id : id
+    }
+  })
+}
+
 module.exports.deletePost = (id) => {
   return PostModel.findOne( {where : {id} })
-  .then( (post) => {
-    // post.destroy();
-  })
   .then((post) => {
     return PostTagModel.findAll({
       where : {postId : id }

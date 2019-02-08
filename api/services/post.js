@@ -4,7 +4,6 @@ const TagModel = require('../../models').tags;
 const PostTagModel = require('../../models').postTag
 
 module.exports.addPost = (post,tags,user) => {
-
   return PostModel.create({
     title : post.title,
     content : post.content,
@@ -13,7 +12,7 @@ module.exports.addPost = (post,tags,user) => {
     updated_at : new Date()
   })
   .then((post) => {
-    return Tag.addTag(post.id,tags)
+    return Tag.addTag(tags,post.id)
   })
   .catch(err => {
     console.log(err);

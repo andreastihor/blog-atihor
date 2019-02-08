@@ -19,6 +19,7 @@ module.exports.addTag = async (tags,postId) => {
   //     })
   //     })
   // })
+  console.log('aaa',tags);
   return tags.map(async tag => {
     // console.log(tag)
     const tagsFind = await Tag.findOrCreate({where : {name : tag}})
@@ -39,9 +40,9 @@ module.exports.updateTags = (tags,id) => {
   // .then(() => {
   //   return Promise.resolve(true)
   // })
-  // this.deleteTag(tags,id).then(() => {
+  this.deleteTag(tags,id).then(() => {
     this.addTag(tags,id)
-  // })
+  })
 }
 
 module.exports.deleteTag = (tags,id) => {

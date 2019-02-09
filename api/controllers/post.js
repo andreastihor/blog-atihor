@@ -24,7 +24,6 @@ module.exports.createPost = (request,h) => {
   }
   const tags = request.payload.tags
   const sucess = Post.addPost(request.payload,tags.split(','),userLogin);
-  return sucess
   if (sucess) {
     return "sucess"
   }
@@ -32,7 +31,13 @@ module.exports.createPost = (request,h) => {
 
 }
 module.exports.deletePost = (request,h) => {
-  const userLogin =  request.headers
+  const jwttoken = request.headers.token
+  try {
+     var token =  jwt.verify(jwttoken,'secret')
+  } catch (err) {
+    console.log(err);
+  }
+  const userLogin = token.user
   if (!userLogin) {
     return "false"
   }
@@ -44,7 +49,13 @@ module.exports.deletePost = (request,h) => {
 }
 
 module.exports.updatePost = (request,h) => {
-  const userLogin =  request.headers
+  const jwttoken = request.headers.token
+  try {
+     var token =  jwt.verify(jwttoken,'secret')
+  } catch (err) {
+    console.log(err);
+  }
+  const userLogin = token.user
   if (!userLogin) {
     return "false"
   }

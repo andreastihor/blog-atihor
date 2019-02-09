@@ -33,24 +33,35 @@ module.exports.getbyId = (id) => {
   })
 }
 
-module.exports.deletePost = (id) => {
-  return PostModel.findOne( {where : {id} })
-  .then((post) => {
-    return PostTagModel.findAll({
-      where : {postId : id }
-    })
-    .then(posts => {
-      posts.map((post) => {
-        post.destroy();
-      })
-      .then(() => {
-        return 1
-      })
-    })
+module.exports.deletePost = async (id) => {
+  //   return PostTagModel.findAll({
+  //     where : {postId : id }
+  //   })
+  //   .then(posttag => {
+  //     posttag.map((postTag) => {
+  //       return postTag.destroy();
+  //     })
+  //   })
+  //   .then(() => {
+  //       console.log('this is promise',asd);
+  //       return PostModel.findOne({where : {id}})
+  //       .then(postx => {
+  //         return postx.destroy()
+  //       })
+  //   })
+  // .catch(err => {
+  //   return "error gan"
+  // })
+  const posttags = await PostTagModel.findAll({
+    where : {postId : id}
   })
-  .catch(err => {
-    return 0
+  posttags.map( posttag => {
+    posttag.destroy()
   })
+  const posttag = await PostModel.findOne({
+    where : {id}
+  })
+  posttag.destroy();
 }
 
 module.exports.updatePost = (id,payload,tags) => {

@@ -106,7 +106,7 @@ module.exports.search = (tag) => {
       })
     })
     .then(articles=> {
-      return Promise.resolve(articles[0])
+      return Promise.resolve(articles)
     })
     .catch(err => {
       return {message: 'id undefined!'}
